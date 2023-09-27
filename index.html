@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculatrice JavaScript</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Calculatrice JavaScript</h1>
+
+
+    <h3> Les differentes commandes </h3>
+    <p> les differentes saisie clavier </p>
+    <p> échap efface tout </p>
+    <p> Entrer effectue le calcul</p>
+
+    <input type="text" id="affi" enabled>
+    <br>
+    <br>
+
+    <button onclick="effacer()">C</button>
+    <button onclick="ajouter(7)">7</button>
+    <button onclick="ajouter(8)">8</button>
+    <button onclick="ajouter(9)">9</button>
+    <button onclick="ajouter('+')">+</button>
+    <br>
+    <br>
+    <button onclick="ajouter(4)">4</button>
+    <button onclick="ajouter(5)">5</button>
+    <button onclick="ajouter(6)">6</button>
+    <button onclick="ajouter('-')">-</button>
+    <br>
+    <br>
+    <button onclick="ajouter(1)">1</button>
+    <button onclick="ajouter(2)">2</button>
+    <button onclick="ajouter(3)">3</button>
+    <button onclick="ajouter('*')">*</button>
+    <br>
+    <br>
+    <button onclick="ajouter(0)">0</button>
+    <button onclick="ajouter('/')">/</button>
+    <button onclick="calculer()">=</button>
+
+    <script>
+       let affichage = document.getElementById("affi");
+let equation = "";
+
+function ajouter(chiffre) {
+    equation += chiffre;
+    affi.value = equation;
+}
+
+function ajouter(operateur) {
+    equation += operateur;
+    affi.value = equation;
+}
+
+function effacer() {
+    equation = "";
+    affi.value = "";
+}
+
+function calculer() {
+    try {
+        equation = eval(equation);
+        affi.value = equation;
+    } catch (error) {
+        affi.value = "Erreur";
+    }
+}
+
+
+// Capturer les entrées clavier
+document.addEventListener("keydown", function (event) {
+    const key = event.key;
+
+    if (key.match(/[0-9+\-*/=.]/)) {
+        ajouter(key);
+    } else if (key === "Enter") {
+        calculer();
+    } else if (key === "Escape") {
+        effacer();
+    }
+      else if (key === "Backspace") {
+       // document.getElementById("affi").value=document.getElementById("affi").value.slice(0, -1);
+       equation = equation.slice(0, -1);
+        affi.value = equation;
+    }
+});
+
+    </script>
+</body>
+</html>
